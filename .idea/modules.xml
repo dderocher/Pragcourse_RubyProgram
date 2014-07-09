@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Prag_RubyProgram.iml" filepath="$PROJECT_DIR$/.idea/Prag_RubyProgram.iml" />
       <module fileurl="file://$USER_HOME$/Dropbox/DEVELOPMENT/_Training Course Work/Pragmatic Studio Ruby Programming/.idea/Pragmatic Studio Ruby Programming.iml" filepath="$USER_HOME$/Dropbox/DEVELOPMENT/_Training Course Work/Pragmatic Studio Ruby Programming/.idea/Pragmatic Studio Ruby Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../food_finder/.idea/food_finder.iml" filepath="$PROJECT_DIR$/../food_finder/.idea/food_finder.iml" />
     </modules>
   </component>
 </project>
