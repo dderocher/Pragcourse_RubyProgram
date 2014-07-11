@@ -48,3 +48,22 @@ puts "\n*******STRINGS AND ENCODINGS*********"
 plain_string = 'dog'
 puts RUBY_VERSION
 puts "Encoding of #{plain_string.inspect} is #{plain_string.encoding}"
+
+
+
+puts "\nOpen file and parse each line"
+
+Song = Struct.new(:title,:name,:lenght)
+
+File.open("songdata") do |song_file|
+  songs = []
+  song_file.each do |line|
+    #file, length, name, title = line.chomp.split(/\s*\|\s*/)
+    file, length, name, title = line.chomp.split("|")
+    name.squeeze!(" ")
+    songs << Song.new(title, name,length)
+  end
+
+  puts songs[1]
+end
+
