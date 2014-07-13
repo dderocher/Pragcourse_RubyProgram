@@ -1,4 +1,5 @@
-#test commit again 14 mac
+
+=begin
 puts 'Mikey loves Goonies'
 
 puts 'Mikey\'s favorite movie is Goonies'
@@ -19,3 +20,18 @@ puts "#{movie} has a rank of #{rank * 2}
 
 puts "#{movie} has a rank of \n#{rank * 2} 
       \nas of #{Time.new}"
+=end
+
+
+movie = "ghostbusters"
+title = movie.capitalize
+title.ljust(30,'.')
+puts "\n#{title}"
+
+#can also say...
+title = movie.capitalize.ljust(30,'.')
+
+rank = 9
+
+puts "#{title} #{rank}"
+
