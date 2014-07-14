@@ -1,3 +1,33 @@
+def weekday
+  current_time = Time.new
+  today = current_time.strftime("%A")
+
+  return today
+end
+
+
+def movie_listing(title, rank=0)
+
+   return " #{title.capitalize} has a rank of #{rank} as of #{weekday}. "
+end
+
+
+puts movie_listing("Goonies",10)
+puts movie_listing("ghostbusters",7)
+
+
+a_title = 'goldfinger'
+puts movie_listing(a_title)
+
+
+
+
+
+
+
+
+
+
 
 =begin
 puts 'Mikey loves Goonies'
@@ -20,7 +50,7 @@ puts "#{movie} has a rank of #{rank * 2}
 
 puts "#{movie} has a rank of \n#{rank * 2} 
       \nas of #{Time.new}"
-=end
+
 
 
 movie = "ghostbusters"
@@ -35,3 +65,4 @@ rank = 9
 
 puts "#{title} #{rank}"
 
+=end
