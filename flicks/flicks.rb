@@ -14,6 +14,8 @@ class Movie
   def thumbs_down
     @rank -= 1
   end
+
+  #overrides default to_s
   def to_s
     "#{@title} has a rank of #{@rank}"
   end
