@@ -1,3 +1,52 @@
+
+class Player
+
+  #The initialize method is a special "constructor" method. You never call it directly.
+  def initialize(name, health=100)
+    @name = name.capitalize
+    @health = health
+  end
+
+  def to_s
+    "I'm #{@name} with a health of #{@health}."
+  end
+
+  def blam
+    @health -= 10
+    puts "#{@name} got Blammed!"
+  end
+
+  def w00t
+    @health += 15
+   puts  "#{@name} got w00ted!"
+  end
+end
+
+
+current_time = Time.new
+puts " \n #{current_time.strftime("The Game Started on %m/%d/%Y at %I:%M%p ")} \n\n"
+
+
+player1 = Player.new("larry")
+puts player1
+#puts player1.inspect
+
+player2 = Player.new("curly",125)
+puts player2
+
+player3 = Player.new("moe")
+puts player3
+
+ player1.blam
+puts player1
+
+
+
+
+
+
+
+=begin
 def time
   current_time = Time.new
 
@@ -20,6 +69,7 @@ puts say_hello("larry", 60)
 puts say_hello("curly", 125)
 puts say_hello("moe")
 puts say_hello("shemp", 90)
+=end
 
 
 
