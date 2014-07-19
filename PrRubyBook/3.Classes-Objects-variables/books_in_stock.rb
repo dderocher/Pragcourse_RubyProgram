@@ -2,6 +2,7 @@ class BookInStock
 
   #Notice the use of symbols here which are just convenient ways of referencing names
   #this is just a shortcut to creating accessor methods.  it does not creat the instance vars...
+  # You can also override these attr_ funcs if logic is needed
   attr_reader :isbn
   attr_accessor :price
 
