@@ -42,7 +42,35 @@ current_time = Time.new
 puts " \n #{current_time.strftime("The Game Started on %m/%d/%Y at %I:%M%p ")} \n\n"
 
 
+players = []
+players << Player.new('moe')
+players << Player.new('larry',60)
+players << Player.new('curly',125)
+
+puts " There are #{players.count} players in the game "
+
+players.each  do |player|
+  puts player
+end
+
+players.each { |player| puts player.health }
+
+
+players.pop
+players.push(Player.new('shemp',90))
+
+players.each do |player|
+  player.blam
+  player.w00t
+  puts player
+end
+
+=begin
+player1 = Player.new('moe')
 player2 = Player.new('larry',60)
+player3 = Player.new('curly',125)
+
+
 puts player2.name
 puts player2.health
 
@@ -51,67 +79,7 @@ puts player2.name
 
 puts " Score: #{player2.score}"
 puts player2
-
-
-
-
-
-
-=begin
-def time
-  current_time = Time.new
-
-  return current_time.strftime("%I:%M:%S%p")
-end
-
-def say_hello(name,health=0)
-  return "I'm #{name.capitalize} with a health of #{health} as of #{time}."
-end
-
-
-current_time = Time.new
-
-puts " \n #{current_time.strftime("The Game Started on %m/%d/%Y at %I:%M%p ")} \n\n"
-
-
-
-
-puts say_hello("larry", 60)
-puts say_hello("curly", 125)
-puts say_hello("moe")
-puts say_hello("shemp", 90)
 =end
 
 
 
-
-
-=begin
--------------------------------------
-player1 = 'larry'
-player1_health = 60
-
-player2 = 'curly'
-player2_health = 125
-
-player3 = 'moe'
-player3_health = 100
-
-player4 = 'shemp'
-player4_health = 90
-
-
-player2_health = player1_health
-player1_health = 30
-
-puts " #{player1.capitalize}'s health is #{player1_health}"
-puts " #{player2.upcase}'s health is #{player2_health}"
-puts " #{player3.capitalize}'s health is #{player3_health} ".center(60,'*' )
-
-puts " #{player4.upcase.ljust(40, '.' )} health is #{player4_health}"
-
-puts " Players:\n\t #{player1}\n\t #{player2}\n\t #{ player3}"
-
---------------------------------------------------------
-
-=end

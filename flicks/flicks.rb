@@ -1,4 +1,4 @@
-class Movie
+  class Movie
 
 
   attr_accessor :title
@@ -28,6 +28,21 @@ class Movie
 end
 
 
+
+  movie1 = Movie.new("goonies",10)
+  movie2 = Movie.new("ghostbusters",9)
+  movie3 = Movie.new("goldfinger")
+
+  movies = [movie1,movie2,movie3]
+
+  puts movies.inspect
+
+  movies.each do |movie_loop|
+    movie_loop.thumbs_up
+    puts movie_loop
+  end
+
+=begin
 movie1 = Movie.new("goonies",10)
 movie1.thumbs_up
 puts movie1
@@ -40,6 +55,7 @@ puts movie1.title
 # movie3 = Movie.new("goldfinger")
 # puts movie3
 
+=end
 
 
 
