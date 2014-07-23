@@ -262,6 +262,7 @@ triangular_numbers = Enumerator.new do |yielder|
 end
 
 5.times {print triangular_numbers.next, ' '}
+puts
 
 
 puts "#{"\n" + "-" * dash_length}"
@@ -273,3 +274,227 @@ puts "#{'-' * dash_length}"
 # first) on them:
 
 p triangular_numbers.first(5)
+
+=begin
+You have to be slightly careful with enumerators that can generate infinite sequences. Some
+of the regular Enumerator methods such as count and select will happily try to read the whole
+enumeration before returning a result. If you want a version of select that works with infinite
+sequences, in Ruby 1.9 you’ll need to write it yourself. (⇡New in 2.0⇣ Ruby 2 users have a better option,
+which we discuss in a minute.)
+
+Here’s a version you can do by hand  (1.9) that gets passed an enumerator and a block
+and returns a new enumerator containing values from the original for which the block returns
+ true. We’ll use it to return triangular numbers that are multiples of 10.
+=end
+
+puts "#{"\n" + "-" * dash_length}"
+puts "Enumerators Are Generators and Filters example 3"
+puts "#{'-' * dash_length}"
+
+
+def infinite_select(enum, &block)
+  Enumerator.new do |yielder|
+    enum.each do |value|
+      yielder.yield(value) if block.call(value)
+    end
+  end
+end
+
+p infinite_select(triangular_numbers) {|val|  val %10 ==0}.first(10)
+
+=begin
+The above can be made  more  convenient by adding filters such as infinite_select directly to the Enumerator class.
+Here’s an example that returns the first five triangular numbers that are multiples of 10 and
+ that have the digit 3 in them:
+=end
+
+puts "#{"\n" + "-" * dash_length}"
+puts "Enumerators Are Generators and Filters example 4"
+puts "#{'-' * dash_length}"
+
+class Enumerator
+  def infinite_select(&block)
+    Enumerator.new do |yielder|
+      self.each do |value|
+        yielder.yield(value) if block.call(value)
+      end
+    end
+  end
+end
+
+p triangular_numbers.infinite_select {|val| val%10==0}
+                               .infinite_select {|val| val.to_s =~ /3/}
+                               .first(5)
+
+
+
+
+########################################################
+puts "\n#{'*' * dash_length}"
+puts "Lazy Enumerators in Ruby 2"
+puts "#{'*' * dash_length}"
+#########################################################
+
+=begin
+Lazy Enumerators in Ruby 2  ⇡New in 2.0⇣
+As we saw in the previous section, the problem with enumerators that generate infinite
+sequences is that we have to write special, non-­‐‑greedy, versions of methods such as select.
+ Fortunately, if you’re using Ruby 2.0, you have this support built in.
+
+none of the lazy versions of the methods actually consume any data from the collection until that
+data is requested, and then they only consume enough to satisfy that request
+
+To work this magic, the lazy versions of the various methods do not return arrays of data.
+Instead, each returns a new enumerator that includes its own special processing
+
+The result is that if you
+chain a bunch of lazy enumerator methods, what you end up with is a chain of enumera-­‐‑
+tors
+
+=end
+
+
+# Let’s play with this a little. To start, let’s add a helper method to the Integer class that generates
+# a stream of integers
+
+puts "#{"\n" + "-" * dash_length}"
+puts "Lazy Enumerators in Ruby 2 example 1"
+puts "#{'-' * dash_length}"
+
+
+def Integer.all
+  Enumerator.new do |yielder, n: 0|
+    loop {yielder.yield(n +=1)}
+  end.lazy #convert the basic generator into a lazy enumerator with the call to lazy after the end of the block.
+end
+
+p Integer.all.first(10)
+
+=begin
+ Calling the first method on this returns the numbers 1 through 10, but this doesn’t exercise
+ the method’s lazy characteristics. Let’s instead get the first 10 multiples of three.
+
+NOTE:
+Without the lazy enumerator, the call to select would effectively never return, as select would
+try to read all the values from the generator. But the lazy version of select only consumes
+values on demand, and in this case the subsequent call to first only asks for 10 values
+
+=end
+puts "#{"\n" + "-" * dash_length}"
+puts "Lazy Enumerators in Ruby 2 example 2"
+puts "#{'-' * dash_length}"
+
+p Integer
+  .all
+  .select {|i| (i % 3).zero?}
+  .first(10)
+
+
+########################################################
+puts "\n#{'*' * dash_length}\nBlocks for Transactions\n#{'*' * dash_length}\n"
+#########################################################
+
+
+# you’ll often open a file, do something with its contents, and then
+# ensure that the file is closed when you finish.
+
+puts "#{"\n" + "-" * dash_length} \nBlocks for Transactions example 1\n#{'-' * dash_length}\n"
+
+class File
+  #*args  meaning collect the actual parameters passed to the method into an array named args.
+  def self.open_and_process(*args)
+    f = self.open(*args)
+    yield f
+    f.close()
+  end
+end
+
+File.open_and_process("testfile","r") do |file|
+  while line = file.gets
+    puts line
+  end
+end
+
+########################################################
+puts "\n#{'*' * dash_length}\nBlocks Can Be Objects\n#{'*' * dash_length}\n"
+#########################################################
+=begin
+If the last parameter in a method definition is prefixed with an ampersand (such as &action),
+Ruby looks for a code  block whenever that method is called. That code block is converted to
+ an object of class Proc  and assigned to the parameter. You can then treat the parameter
+ as any other variable.
+=end
+
+puts "#{"\n" + "-" * dash_length} \nBlocks Can Be Objects example 1\n#{'-' * dash_length}\n"
+
+class ProcExample
+  def initialize(&action)
+    @stored_proc = action
+  end
+  def use_proc(parameter)
+    @stored_proc.call(parameter)
+  end
+end
+
+eg = ProcExample.new {|param| puts "The parameter is  #{param}"}
+eg.use_proc(99)
+
+
+=begin
+If a block can be turned
+into an object by adding an ampersand parameter to a method, what happens if that method
+then returns the Proc object to the caller?
+=end
+
+puts "#{"\n" + "-" * dash_length} \nBlocks Can Be Objects example 2\n#{'-' * dash_length}\n"
+
+def create_block_object (&block)
+  block
+end
+
+bo = create_block_object {|param| puts "You called me with #{param}"}
+
+bo.call 100
+bo.call "hello"
+
+#lambda and Proc.new take a block and return an object of class Proc.
+puts "#{"\n" + "-" * dash_length} \nBlocks Can Be Objects example 3\n#{'-' * dash_length}\n"
+
+bo2 = lambda  {|param| puts "You called me with #{param}"}
+bo2.call 100
+bo2.call "hello"
+
+
+########################################################
+puts "\n#{'*' * dash_length}\nBlocks Can Be Closures\n#{'*' * dash_length}\n"
+#########################################################
+#  closure—variables in the surrounding scope that are referenced in a block
+# remain accessible for the life of that block and the life of any Proc object  created from that block.
+
+puts "#{"\n" + "-" * dash_length} \nBlocks Can Be Closures example 1\n#{'-' * dash_length}\n"
+
+def n_times(thing)
+  lambda {|n| thing * n}
+end
+
+p1 = n_times(23)
+puts p1.call(3)
+
+p1 = n_times('hello')
+puts p1.call(3)
+
+puts "#{"\n" + "-" * dash_length} \nBlocks Can Be Closures example 2\n#{'-' * dash_length}\n"
+
+def mydoubler
+  value = 1
+  lambda {value += value}
+end
+
+doubler = mydoubler
+
+puts doubler.call
+puts doubler.call
+puts doubler.call
+puts doubler.call
+
+
