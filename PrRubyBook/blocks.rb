@@ -498,3 +498,16 @@ puts doubler.call
 puts doubler.call
 
 
+########################################################
+puts "\n#{'*' * dash_length}\nAn Alternative Notation\n#{'*' * dash_length}\n"
+#########################################################
+
+
+puts "#{"\n" + "-" * dash_length} \nAn Alternative Notation example 1 \n#{'-' * dash_length}\n"
+
+proc1 = -> arg {puts "In proc1 with #{arg}"}
+
+puts proc1.call 'ant'
+
+
+
