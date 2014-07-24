@@ -502,12 +502,31 @@ puts doubler.call
 puts "\n#{'*' * dash_length}\nAn Alternative Notation\n#{'*' * dash_length}\n"
 #########################################################
 
+=begin
+Alternative Notation
+The -> form is more compact than using lambda and seems to be in favor when you want to
+pass one or more Proc objects to a method
+=end
+
 
 puts "#{"\n" + "-" * dash_length} \nAn Alternative Notation example 1 \n#{'-' * dash_length}\n"
 
 proc1 = -> arg {puts "In proc1 with #{arg}"}
-
 puts proc1.call 'ant'
 
+proc2 = -> arg1,arg2 {puts "In proc2 with #{arg1} and #{arg2}"}
+puts proc2.call 'buzzy', 'bee'
 
+puts "#{"\n" + "-" * dash_length} \nAn Alternative Notation example 2 \n#{'-' * dash_length}\n"
 
+def my_if(condition, then_clause_proc, else_clause_proc )
+  if condition
+    then_clause_proc.call
+  else
+    else_clause_proc.call
+  end
+end
+
+5.times do |val|
+  my_if val < 2, -> {puts "#{val} is small"}, ->{ puts "#{val} is big "}
+end
