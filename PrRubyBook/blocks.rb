@@ -530,3 +530,6 @@ end
 5.times do |val|
   my_if val < 2, -> {puts "#{val} is small"}, ->{ puts "#{val} is big "}
 end
+
+
+d

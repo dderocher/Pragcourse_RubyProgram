@@ -3,6 +3,9 @@
   <component name="CompassSettings">
     <option name="compassSupportEnabled" value="true" />
   </component>
+  <component name="DBNavigator.Module.ConnectionManager">
+    <connections />
+  </component>
   <component name="ModuleRunConfigurationManager">
     <configuration default="false" name="IRB console: Prag_RubyProgram" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
       <module name="Prag_RubyProgram" />

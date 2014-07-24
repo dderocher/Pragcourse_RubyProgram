@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2575440809">
+    <data-source source="LOCAL" name="Sybase - @localhost" uuid="2bab4e61-316c-49ed-85a4-399689af96f6">
+      <driver-ref>sybase.ase</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.sybase.jdbc4.jdbc.SybConnectionPoolDataSource</jdbc-driver>
+      <jdbc-url>jdbc:sybase:Tds:indlnxpbus:5006/test1</jdbc-url>
+      <user-name>dbxx</user-name>
+      <user-password>dfcedfc8dfd2dfd2dfdedfcfdfd9dfde</user-password>
+      <schema-pattern>test1.*</schema-pattern>
+      <default-schemas>test1.*</default-schemas>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
