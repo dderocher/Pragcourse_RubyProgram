@@ -27,7 +27,27 @@
 
 end
 
+class Playlist
+  def initialize(name)
+    @name = name
+    @movies = []
+  end
 
+  def add_movie(movie)
+    @movies << movie
+  end
+
+  def play
+    puts "#{@name}'s playlist:'"
+    puts @movies
+
+    @movies.each do |movie|
+      movie.thumbs_up
+      puts movie
+    end
+  end
+
+end
 
   movie1 = Movie.new("goonies",10)
   movie2 = Movie.new("ghostbusters",9)
@@ -35,12 +55,15 @@ end
 
   movies = [movie1,movie2,movie3]
 
-  puts movies.inspect
+#Need a way to play movies
 
-  movies.each do |movie_loop|
-    movie_loop.thumbs_up
-    puts movie_loop
-  end
+  playlist1 = Playlist.new("Dave'")
+  playlist1.add_movie(movie1)
+  playlist1.add_movie(movie2)
+  playlist1.add_movie(movie3)
+  playlist1.play
+
+
 
 =begin
 movie1 = Movie.new("goonies",10)

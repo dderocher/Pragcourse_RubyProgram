@@ -38,18 +38,51 @@ class Player
 
 end #class Player
 
+class Game
+
+  attr_reader :title
+
+  def initialize(title)
+    @title = title.capitalize
+    @players = []
+  end
+
+  def add_player(a_player)
+    @players << a_player
+    #also @players.push(a_player)
+
+  end
+
+  def play
+    puts "There are #{@players.count} players in the game "
+      @players.each do |player|
+      puts player
+      player.blam
+      player.w00t
+      puts player
+    end
+
+  end
+
+end
+
+
 
 current_time = Time.new
 puts " \n #{current_time.strftime("The Game Started on %m/%d/%Y at %I:%M%p ")} \n\n"
 
 
-players = []
-players << Player.new('moe')
-players << Player.new('larry',60)
-players << Player.new('curly',125)
+knuckleheads = Game.new('knuckleheads')
 
-puts " There are #{players.count} players in the game "
+knuckleheads.add_player( Player.new('moe'))
+knuckleheads.add_player( Player.new('larry',60))
+knuckleheads.add_player(Player.new('curly',125))
 
+knuckleheads.play
+
+puts knuckleheads.title
+
+=begin
 players.each  do |player|
   puts player
 end
@@ -65,6 +98,7 @@ players.each do |player|
   player.w00t
   puts player
 end
+=end
 
 =begin
 player1 = Player.new('moe')
