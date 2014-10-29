@@ -1,9 +1,13 @@
 
 
-require_relative 'movie'
+#require_relative 'movie'
 require_relative 'playlist'
 
-  movie1 = Movie.new("goonies",10)
+# Interesting This prints the current running program which is flicks.rb
+# puts $0
+
+
+movie1 = Movie.new("goonies",10)
   movie2 = Movie.new("ghostbusters",9)
   movie3 = Movie.new("goldfinger")
 
