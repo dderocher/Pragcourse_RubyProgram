@@ -42,8 +42,10 @@ You should then be able to run your specs and not see any deprecation warnings. 
 
 RSpec.configure do |config|
 
-  #config.color_enabled = true
   config.color = true
   #config.order = "random"
   #config.formatter = 'NyanCatWideFormatter'
+
+  #So when the spec runs, we need a way to "turn off" standard output.
+  $stdout = StringIO.new
 end
