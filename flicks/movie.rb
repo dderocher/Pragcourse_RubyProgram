@@ -26,5 +26,23 @@ class Movie
     "#{@title} has a rank of #{@rank}"
   end
 
+  def hit?
+    if @rank >= 10
+      true
+    else
+      false
+    end
+  end
+
+  def status
+    # if @rank >= 10
+    #   'Hit'
+    # else
+    #   'Flop'
+    # end
+
+    hit? ? 'Hit' : 'Flop'
+
+  end
 
 end

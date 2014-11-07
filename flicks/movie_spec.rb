@@ -49,18 +49,40 @@ describe Movie do
     expect(@movie.rank).to eq(@initial_rank - 1)
   end
 
-  context "created with a default rank" do
+  context 'created with a default rank' do
     before do
       @movie = Movie.new("goonies")
     end
 
-    it "has a rank of 0" do
+    it 'has a rank of 0' do
       expect(@movie.rank).to  eq(0)
     end
 
   end
 
+  context 'with a rank of at least 10' do
+    before do
+      @movie  = Movie.new("goonies",10)
+    end
 
+    it 'is a hit' do
+      expect(@movie.hit?).to eq(true)
+    end
+
+    it 'has a hit status' do
+      expect(@movie.status).to eq('Hit')
+    end
+
+  end
+
+  context 'with a rank of less than 10' do
+    before do
+      @movie = Movie.new('goonies',9)
+    end
+     it 'is not a hit' do
+        expect(@movie.hit?).to eq(false)
+     end
+  end
 end
 
 
