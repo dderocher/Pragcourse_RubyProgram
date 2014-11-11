@@ -52,4 +52,17 @@ describe Player do
 
   end
 
+  context 'having a health of greater than 100' do
+
+    before do
+      @player = Player.new('larry',150)
+    end
+
+    it 'is a strong player' do
+      expect(@player.strong?).to eq(true)
+    end
+
+
+  end
+
 end
