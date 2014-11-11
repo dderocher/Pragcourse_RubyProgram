@@ -49,7 +49,7 @@ describe Player do
     @player.blam
 
     expect(@player.health).to eq(@initial_health - 10)
-
+#
   end
 
   context 'having a health of greater than 100' do
