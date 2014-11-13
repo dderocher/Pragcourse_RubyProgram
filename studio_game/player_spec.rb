@@ -53,15 +53,27 @@ describe Player do
 
   context 'having a health of greater than 100' do
 
+      before do
+        @player = Player.new('larry',150)
+      end
+
+      it 'is a strong player' do
+        #expect(@player.strong?).to eq(true)
+
+        #syntactic sugar when writing expectations for predicate methods (methods such as strong? that end in a question mark).
+        expect(@player).to be_strong
+
+      end
+  end
+
+  context 'having a health of 100 or less' do
+
     before do
-      @player = Player.new('larry',150)
+      @player = Player.new('shazam',100)
     end
-
-    it 'is a strong player' do
-      expect(@player.strong?).to eq(true)
+    it 'is wimpy' do
+      expect(@player).not_to be_strong
     end
-
-
   end
 
 end

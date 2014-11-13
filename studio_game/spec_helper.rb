@@ -47,5 +47,5 @@ RSpec.configure do |config|
   #config.formatter = 'NyanCatWideFormatter'
 
   #So when the spec runs, we need a way to "turn off" standard output.
-  $stdout = StringIO.new
+  #$stdout = StringIO.new
 end

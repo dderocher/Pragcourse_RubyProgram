@@ -34,18 +34,27 @@ class Player
     puts  "#{@name} got w00ted!"
   end
 
+  def strong?
+
+    if @health > 100
+      true
+    else
+      false
+    end
+
+  end
 end #class Player
 
 
 #Example of how to wing in some testcoce
 if __FILE__ == $0
 
-  puts '--------TEST CODE-------'
-  player = Player.new("moe")
-  puts player.name
-  puts player.health
-  player.w00t
-  puts player.health
-  player.blam
-  puts player.health
+    puts '--------TEST CODE-------'
+    player = Player.new("moe")
+    puts player.name
+    puts player.health
+    player.w00t
+    puts player.health
+    player.blam
+    puts player.health
  end
