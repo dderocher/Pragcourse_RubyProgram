@@ -2,12 +2,14 @@
 module Reviewer
   #Modules are not instantiated -  for buckets of related methods
 
+
+  #use self. for a module method
   def self.roll_die
     rand(1..6)
   end
 
   def self.review(movie)
-    puts "Bravo!"
+    #puts 'Bravo!'
 
     number_rolled = roll_die
 
@@ -25,4 +27,3 @@ module Reviewer
   end
 end
 
-Reviewer.review

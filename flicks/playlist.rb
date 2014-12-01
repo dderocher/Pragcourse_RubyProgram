@@ -1,5 +1,6 @@
 #since in same directory
 require_relative 'movie'
+require_relative 'reviewer'
 
 class Playlist
   def initialize(name)

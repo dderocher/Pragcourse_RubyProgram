@@ -1,9 +1,8 @@
 require 'rspec'
 require_relative 'spec_helper'
-
 require_relative 'game'
 require_relative 'player'
-
+require_relative 'die'
 describe Game do
 
   before do
